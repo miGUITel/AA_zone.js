@@ -4,7 +4,10 @@ const express = require("express");
 const path = require("path");
 
 const config = require("./config");
-const airzoneClient = require("./airzoneClient");
+
+const airzoneClient = config.useMock
+  ? require("./mockClient")
+  : require("./airzoneClient");
 
 const app = express();
 
@@ -78,4 +81,10 @@ app.put("/api/zones/:id/setpoint", async (req, res) => {
 
 app.listen(config.server.port, () => {
   console.log(`Servidor iniciado en http://localhost:${config.server.port}`);
+
+  if (config.useMock) {
+    console.log("Modo actual: MOCK - usando datos simulados");
+  } else {
+    console.log("Modo actual: REAL - conectado a Airzone");
+  }
 });
