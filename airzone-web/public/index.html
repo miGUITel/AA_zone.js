@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airzone Web</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>Airzone Web</h1>
+      <p>Control básico de zonas</p>
+    </header>
+
+    <section class="card">
+      <label for="zoneSelect">Zona seleccionada</label>
+      <select id="zoneSelect">
+        <option>Cargando zonas...</option>
+      </select>
+    </section>
+
+<section class="card zone-card">
+  <div class="zone-heading">
+    <h2 id="zoneName">Zona</h2>
+    <span id="zoneStatus" class="status-pill">---</span>
+  </div>
+
+  <div class="main-temperature">
+    <span class="label">Temperatura actual</span>
+    <strong id="roomTemp">---</strong>
+  </div>
+
+  <div class="setpoint-block">
+    <span class="label">Consigna</span>
+    <strong id="setpoint">---</strong>
+  </div>
+
+  <div class="demand-block">
+    <span>Demanda</span>
+    <strong id="demand">---</strong>
+  </div>
+
+  <div class="secondary-info">
+    <div>
+      <span>Humedad</span>
+      <strong id="humidity">---</strong>
+    </div>
+
+    <div>
+      <span>Batería</span>
+      <strong id="battery">---</strong>
+    </div>
+
+    <div>
+      <span>Cobertura</span>
+      <strong id="coverage">---</strong>
+    </div>
+  </div>
+</section>
+
+    <section class="card controls-card">
+      <button id="toggleButton" class="main-button">
+        Encender / apagar zona
+      </button>
+
+      <div class="temperature-controls">
+        <button id="decreaseButton" class="secondary-button">
+          -0.5 ºC
+        </button>
+
+        <button id="increaseButton" class="secondary-button">
+          +0.5 ºC
+        </button>
+      </div>
+    </section>
+
+    <section class="message-card">
+      <p id="message"></p>
+    </section>
+  </main>
+</body>
+</html>
