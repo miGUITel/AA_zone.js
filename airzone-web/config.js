@@ -1,6 +1,8 @@
 // config.js
 
 const config = {
+  useMock: true,
+
   airzone: {
     host: "192.168.1.150",
     port: 3000,
