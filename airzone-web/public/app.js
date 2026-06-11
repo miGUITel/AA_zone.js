@@ -20,6 +20,10 @@ const increaseButton = document.getElementById("increaseButton");
 
 const message = document.getElementById("message");
 
+const modeButton = document.getElementById("modeButton");
+const modeIcon = document.getElementById("modeIcon");
+const modeText = document.getElementById("modeText");
+
 // -------------------------
 // Funciones de llamada a la API
 // -------------------------
@@ -123,6 +127,7 @@ function renderZone(zone) {
   coverage.textContent = `${zone.coverage} %`;
 
   toggleButton.textContent = zone.on ? "Apagar zona" : "Encender zona";
+  renderMode(zone.mode);
 }
 
 function renderZoneOptions(zonesList) {
@@ -134,6 +139,25 @@ function renderZoneOptions(zonesList) {
     option.textContent = zone.name;
     zoneSelect.appendChild(option);
   });
+}
+
+function renderMode(mode) {
+  if (mode === 3) {
+    modeButton.classList.remove("mode-cold");
+    modeButton.classList.add("mode-heat");
+    modeIcon.textContent = "🔥";
+    modeText.textContent = "Modo calor";
+    document.body.classList.remove("theme-cold");
+    document.body.classList.add("theme-heat");
+    return;
+  }
+
+  modeButton.classList.remove("mode-heat");
+  modeButton.classList.add("mode-cold");
+  modeIcon.textContent = "❄️";
+  modeText.textContent = "Modo frío";
+  document.body.classList.remove("theme-heat");
+  document.body.classList.add("theme-cold");
 }
 
 async function loadZones() {
@@ -163,6 +187,22 @@ async function refreshSelectedZone() {
 
   const updatedZone = await getZone(selectedZone.id);
   renderZone(updatedZone);
+}
+
+async function setSystemMode(mode) {
+  const response = await fetch("/api/system/mode", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ mode })
+  });
+
+  if (!response.ok) {
+    throw new Error("No se pudo cambiar el modo del sistema");
+  }
+
+  return await response.json();
 }
 
 // -------------------------
@@ -236,6 +276,32 @@ decreaseButton.addEventListener("click", async () => {
   } catch (error) {
     console.error(error);
     showMessage("Error al bajar la consigna", true);
+  }
+});
+
+modeButton.addEventListener("click", async () => {
+  try {
+    clearMessage();
+
+    if (!selectedZone) {
+      return;
+    }
+
+    const newMode = selectedZone.mode === 2 ? 3 : 2;
+    const updatedZones = await setSystemMode(newMode);
+
+    zones = updatedZones;
+
+    const updatedSelectedZone = zones.find(zone => zone.id === selectedZone.id);
+
+    if (updatedSelectedZone) {
+      renderZone(updatedSelectedZone);
+    }
+
+    showMessage(newMode === 2 ? "Modo frío activado" : "Modo calor activado");
+  } catch (error) {
+    console.error(error);
+    showMessage("Error al cambiar el modo", true);
   }
 });
 
