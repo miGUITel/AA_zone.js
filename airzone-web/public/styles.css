@@ -38,9 +38,9 @@ body {
 }
 
 .card {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 18px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
   background: white;
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
 }
@@ -139,7 +139,7 @@ button:active {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.8rem;
 }
 
 .zone-heading h2 {
@@ -159,7 +159,7 @@ button:active {
 
 .main-temperature {
   margin-bottom: 1rem;
-  padding: 1.2rem;
+  padding: 0.5rem;
   border-radius: 18px;
   background: #f0f9ff;
   text-align: center;
@@ -181,7 +181,7 @@ button:active {
 
 .setpoint-block {
   margin-bottom: 1rem;
-  padding: 0.9rem 1rem;
+  padding: 0.5 rem;
   border-radius: 16px;
   background: #ecfdf5;
   text-align: center;
