@@ -10,6 +10,10 @@ body {
   color: #1f2933;
 }
 
+body.theme-heat {
+  background: #fff3e8;
+}
+
 .app {
   width: 100%;
   max-width: 430px;
@@ -18,22 +22,47 @@ body {
 }
 
 .app-header {
+  width: 100%;
   margin-bottom: 1rem;
   padding: 1.25rem;
   border-radius: 18px;
-  background: linear-gradient(135deg, #0f6ca6, #159895);
   color: white;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.9rem;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.14);
 }
 
-.app-header h1 {
-  margin: 0;
+.app-header.mode-cold {
+  background: linear-gradient(135deg, #0f6ca6, #159895);
+}
+
+.app-header.mode-heat {
+  background: linear-gradient(135deg, #c2410c, #f97316);
+}
+
+.mode-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header-text strong {
   font-size: 2rem;
+  line-height: 1;
 }
 
-.app-header p {
-  margin: 0.4rem 0 0;
+.header-text small {
+  margin-top: 0.35rem;
   font-size: 1rem;
+  font-weight: normal;
   opacity: 0.95;
 }
 
@@ -67,6 +96,10 @@ select {
   color: #0f6ca6;
 }
 
+body.theme-heat .zone-card h2 {
+  color: #c2410c;
+}
+
 .controls-card {
   display: flex;
   flex-direction: column;
@@ -91,10 +124,19 @@ button:active {
   color: white;
 }
 
+body.theme-heat .main-button {
+  background: #c2410c;
+}
+
 .secondary-button {
   flex: 1;
   background: #e0f2fe;
   color: #075985;
+}
+
+body.theme-heat .secondary-button {
+  background: #ffedd5;
+  color: #9a3412;
 }
 
 .temperature-controls {
@@ -125,7 +167,7 @@ button:active {
     max-width: 620px;
   }
 
-  .app-header h1 {
+  .header-text strong {
     font-size: 2.3rem;
   }
 
@@ -148,6 +190,10 @@ button:active {
   color: #0f6ca6;
 }
 
+body.theme-heat .zone-heading h2 {
+  color: #c2410c;
+}
+
 .status-pill {
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
@@ -157,12 +203,21 @@ button:active {
   color: #075985;
 }
 
+body.theme-heat .status-pill {
+  background: #ffedd5;
+  color: #9a3412;
+}
+
 .main-temperature {
   margin-bottom: 1rem;
   padding: 0.5rem;
   border-radius: 18px;
   background: #f0f9ff;
   text-align: center;
+}
+
+body.theme-heat .main-temperature {
+  background: #fff7ed;
 }
 
 .main-temperature .label {
@@ -181,10 +236,14 @@ button:active {
 
 .setpoint-block {
   margin-bottom: 1rem;
-  padding: 0.5 rem;
+  padding: 0.5rem;
   border-radius: 16px;
   background: #ecfdf5;
   text-align: center;
+}
+
+body.theme-heat .setpoint-block {
+  background: #ffedd5;
 }
 
 .setpoint-block .label {
@@ -198,6 +257,10 @@ button:active {
   display: block;
   font-size: 2rem;
   color: #166534;
+}
+
+body.theme-heat .setpoint-block strong {
+  color: #9a3412;
 }
 
 .demand-block {
