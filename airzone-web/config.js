@@ -4,10 +4,16 @@ const config = {
   useMock: true,
 
   airzone: {
-    host: "192.168.1.150",
+    host: "192.168.1.141",
     port: 3000,
     systemID: 1,
+    masterZoneID: 1,
     endpoint: "/api/v1/hvac"
+  },
+
+  modes: {
+    cold: 2,
+    heat: 3
   },
 
   zones: {
