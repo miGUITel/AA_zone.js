@@ -79,6 +79,27 @@ app.put("/api/zones/:id/setpoint", async (req, res) => {
   }
 });
 
+app.put("/api/system/mode", async (req, res) => {
+  try {
+    const { mode } = req.body;
+
+    if (mode !== 2 && mode !== 3) {
+      return res.status(400).json({
+        error: "Modo no válido. Usa 2 para frío o 3 para calor."
+      });
+    }
+
+    const zones = await airzoneClient.setMode(mode);
+    res.json(zones);
+  } catch (error) {
+    console.error("ERROR AL CAMBIAR MODO:", error);
+    res.status(500).json({
+      error: "No se pudo cambiar el modo",
+      details: error.message
+    });
+  }
+});
+
 app.listen(config.server.port, () => {
   console.log(`Servidor iniciado en http://localhost:${config.server.port}`);
 
