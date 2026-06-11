@@ -89,5 +89,22 @@ module.exports = {
   getZones,
   getZone,
   setZoneOn,
-  setZoneSetpoint
+  setZoneSetpoint,
+  setMode
 };
+
+async function setMode(mode) {
+  if (mode !== 2 && mode !== 3) {
+    throw new Error("Modo no permitido. Usa 2 para frío o 3 para calor.");
+  }
+
+  await requestAirzone("PUT", {
+    systemID: config.airzone.systemID,
+    zoneID: config.airzone.masterZoneID,
+    mode
+  });
+
+  await new Promise(resolve => setTimeout(resolve, 300));
+
+  return await getZones();
+}

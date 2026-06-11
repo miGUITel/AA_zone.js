@@ -30,7 +30,6 @@ function updateDemand(zone) {
     return;
   }
 
-  // Otros modos: ventilación, parada, etc.
   zone.airDemand = false;
   zone.coldDemand = false;
   zone.heatDemand = false;
@@ -86,9 +85,23 @@ async function setZoneSetpoint(zoneID, setpoint) {
   return clone(zone);
 }
 
+async function setMode(mode) {
+  if (mode !== 2 && mode !== 3) {
+    throw new Error("Modo no permitido. Usa 2 para frío o 3 para calor.");
+  }
+
+  zones.forEach(zone => {
+    zone.mode = mode;
+    updateDemand(zone);
+  });
+
+  return clone(zones);
+}
+
 module.exports = {
   getZones,
   getZone,
   setZoneOn,
-  setZoneSetpoint
+  setZoneSetpoint,
+  setMode
 };
